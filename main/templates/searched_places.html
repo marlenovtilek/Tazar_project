@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<section>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="input-group"  style="text-align:center;width:70%">
+            <div class="form-outline">
+            <input type="text" name="search_word" id="form1" class="form-control" />
+            <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+</section>
+    <section id="place">
+        <div class="col-md-4">
+            {% for i in places %}
+                <div class="event_news" style="margin-bottom: 20px">
+                    <div class="event_single_item fix">
+                        <div class="event_news_img floatleft" style="margin-right: 10px">
+                            <img src="{{ i.photo.url }}" alt="">
+                        </div>
+                        <div class="event_news_text">
+                            <a href="{% url 'place_detail' pk=i.pk%}"><h4>{{ i.name }}</h4></a>
+                            <p><b>Адрес:</b> {{ i.address }}</p>
+                            <p><b>Телефон:</b> {{ i.phone }}</p>
+                            <p><b>Часы работы:</b> {{ i.working_from }}-{{ i.working_to }}</p>
+                            <p><b>Принимаемое сырье:</b>
+                            {% for type in i.material_type.all %}
+                                {{ type.name }},
+                            {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock content %}

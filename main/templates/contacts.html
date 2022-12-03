@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <!--Start of contact-->
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="colmd-12">
+                    <div class="contact_area text-center">
+                        <h3>СВЯЗАТЬСЯ С НАМИ</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </div>
+                </div>
+            </div>
+            <!--End of row-->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="office">
+                        <div class="title">
+                            <h5>Наш офис</h5>
+                        </div>
+                        <div class="office_location">
+                            <div class="address">
+                                <i class="fa fa-map-marker"><span>Кыргызстан, г.Бишкек, ул.Байтик Баатыра 34.</span></i>
+                            </div>
+                            <div class="phone">
+                                <i class="fa fa-phone"><span>+996 (312) 540766, +996 (312) 546122</span></i> 
+                            </div>
+                            <div class="email">
+                                <i class="fa fa-envelope"><span>oamkop@mail.ru</span></i>
+                            </div>
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="msg">
+                        <div class="msg_title">
+                            <h5>Отправить сообщение</h5>
+                        </div>
+                        <div class="form_area">
+                            <!-- CONTACT FORM -->
+                            <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+                                <div id="message"></div>
+                                <form action="" method="post" class="form-horizontal contact-1" role="form" name="contactform" id="contactform">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Имя пользователя">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="email" id="email" placeholder="Электронная почта">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="subject" class="form-control" id="subject" placeholder="Тема">
+                                            <div class="text_area">
+                                                
+                                                <textarea name="contact-message" id="msg" class="form-control" cols="30" rows="8" placeholder="Сообщение"></textarea>
+                                            </div>
+                                            <button type="submit" class="btn custom-btn" data-loading-text="Loading...">Отправить</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End of col-md-6-->
+            </div>
+            <!--End of row-->
+        </div>
+        <!--End of container-->
+    </section>
+    <!--End of contact-->
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <section id="place">
+        <div class="event_news">
+            <div class="event_single_item fix">
+                <div class="event_news_img floatleft">
+                    <img src="{{ object.photo.url }}" alt="">
+                </div>
+                <div class="event_news_text">
+                    <h4>{{ object.name }}</h4>
+                    <p>{{ object.address }}</p>
+                    <p>{{ object.phone }}</p>
+                    <p>{{ object.working_from }}-{{ object.working_to }}</p>
+                    {% for type in object.material_type.all %}
+                        <p>{{ type.name }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

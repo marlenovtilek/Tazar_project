@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section id="blog">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest_blog text-center">
+                    <h2>Наши партнеры</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for i in object_list %}
+                <div class="col-md-4">
+                    <div class="blog_news">
+                        <div class="single_blog_item">
+                            <div class="blog_img">
+                                <img src="{{ i.avatar.url }}" alt="">
+                            </div>
+                            <div class="blog_content">
+                                <a href="{{ i.urls }}" target="_blank"><h3>{{ i.name }}</h3></a>
+                                <div class="expert">
+                                    <div class="left-side text-left">
+                                        <p class="left_side">
+                                            <span><i class="fa fa-phone">{{ i.phone }}</i></span><br>
+                                            <span class="phone"> </span>
+                                            <a href=""><span class="email"><i class="fa fa-email"></i>{{ i.email }}</span></a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <p class="blog_news_content">{{ i.description }}</p>
+                                <a href="{{ i.urls }}" target="_blank" class="blog_link">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
