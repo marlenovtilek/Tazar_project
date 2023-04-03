@@ -1,12 +1,12 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import FormView, CreateView, UpdateView, ListView,DetailView
+from django.views.generic import FormView, CreateView, UpdateView, ListView, DetailView
 from main.forms import LoginForm, UserRegisterForm
 from django.views.generic import ListView, DetailView, FormView
 
 
-from main.forms import UserRegisterForm, UserUpdateForm
+from main.forms import UserRegisterForm, UserUpdateForm, PostForm
 
 from .models import CollectionPlaces, Members, Partners, MaterialType
 
@@ -77,7 +77,7 @@ class CollectionPlacesDetailView(DetailView):
 class LatestEventsView(View):
     def get(self, request):
         return render(request, 'events.html')
-
+    
 
 
 
@@ -185,21 +185,22 @@ class UserProfileView(DetailView):
 
 
 
-class PostCreate(CreateView):
+class PostCreateView(CreateView):
+    template_name = 'post.html'
+    model = CollectionPlaces
     
     def get(self, request):
-        return render(request, 'places.html')
+        return render(request, 'post.html')
 
-    def post(self, request):
-        new_post = CollectionPlaces.objects.create(
-            author=request.POST.get('username', ''),
-            image=request.POST.get('photo', ''),
-            name=request.POST.get('name', ''),
-            address=request.POST.get('address',''),
-            phone=request.POST.get('tel', ''),
-            working_from=request.POST.get('working_from', ''),
-            working_to=request.POST.get('working_to', ''),
-            material_type=request.POST.get('material_type', ''))
-
-
-
+    @login_required
+    def create_post(request):
+        if request.method == 'POST':
+            form = PostForm(request.POST)
+            if form.is_valid():
+                post = form.save()
+                print(post)
+                return redirect('index.html')
+        else:
+            form = PostForm(initial={'author':request.user})
+        return render(request, 'post.html', {'form':form})
+    

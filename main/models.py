@@ -35,7 +35,7 @@ class Members(models.Model):
     age = models.CharField("Возраст", max_length=10)
     position = models.CharField("Должность", max_length=50)
     description = models.TextField("Описание")
-    avatar = models.ImageField("Фото участника")
+    avatar = models.ImageField(upload_to="Фото участника")
 
     class Meta:
         verbose_name = "Участник"
@@ -53,14 +53,14 @@ class MaterialType(models.Model):
         return f'{self.name}'
 
 class CollectionPlaces(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="places", null=True)
-    name = models.CharField("Наименование", max_length=128)
-    address = models.CharField("Адрес", max_length=256)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="places", null=True)
+    name = models.CharField("Наименование пункта", max_length=128)
+    address = models.CharField("Адрес пункта", max_length=256)
     phone = models.CharField("Контактный номер", max_length=128)
-    working_from = models.CharField("Время открытия", max_length=10)
-    working_to = models.CharField("Время закрытия", max_length=10)
+    working_hours = models.CharField("График работы", max_length=100, null=True)
     photo = models.ImageField("Картинка", upload_to="collection_places")
-    material_type = models.ManyToManyField(MaterialType, related_name='collection_places')
+    email = models.CharField("Электронная почта", max_length=50, null=True)
+    material_type = models.ManyToManyField(MaterialType, related_name='collection_places', blank=True)
 
     def __str__(self):
         return f'{self.name}'
@@ -72,7 +72,7 @@ class Partners(models.Model):
     address = models.CharField("Адрес организации", max_length=128)
     phone = models.CharField("Контакты организации", max_length=128, null=True)
     email = models.CharField("Электронная почта", max_length=50, null=True)
-    description = models.TextField("Описание")
+    description = models.TextField("Описание", null=True)
     urls = models.CharField("Ссылка на сайт", max_length=50, null=True)
 
     def __str__(self):
@@ -80,11 +80,13 @@ class Partners(models.Model):
 
 class Volunteers(models.Model):
     avatar = models.ImageField(upload_to="volunteers_photo")
-    full_name = models.CharField("Имя волонтера", max_length=20)
+    first_name = models.CharField("Имя волонтера", max_length=20, null=True)
+    last_name = models.CharField("Фамилия волонтера", max_length=20, null=True)
     address = models.CharField("Адрес проживания", max_length=128)
     phone = models.CharField("Контактный номер", max_length=12)
     email = models.CharField("Электронная почта", max_length=50)
     education = models.TextField("Образование")
+    age = models.PositiveIntegerField("Возраст", null=True)
 
     class Meta:
         verbose_name = "Волонтер"
@@ -93,20 +95,16 @@ class Volunteers(models.Model):
     def __str__(self):
         return f'{self.full_name}'
 
-class Post(models.Model):
-    author = models.ForeignKey(User,on_delete=models.CASCADE, related_name='posts' )
-    image = models.ImageField("Фото точек приема пользователя", upload_to = "user_collection_places")
-    name = models.CharField("Наименование организации", max_length=256)
-    address = models.CharField("Адрес организации", max_length=256)
-    phone = models.CharField("Контакты организации", max_length=128, null=True)
-    working_from = models.CharField("Время открытия", max_length=10)
-    working_to = models.CharField("Время закрытия", max_length=10)
-    material_type = models.ManyToManyField(MaterialType, related_name='posts')
 
-    class Meta:
-        verbose_name = "Объявление"
-        verbose_name_plural = "Объявления"
+class UserPosts(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="places",null=True)
+    name = models.CharField("Наименование пункта", max_length=128)
+    address = models.CharField("Адрес пункта", max_length=256)
+    phone = models.CharField("Контактный номер", max_length=128)
+    working_hours = models.CharField("График работы", max_length=100, null=True)
+    photo = models.ImageField("Картинка", upload_to="collection_places")
+    email = models.CharField("Электронная почта", max_length=50, null=True)
+    material_type = models.ManyToManyField(MaterialType, related_name='user_collection_places',blank=True)
 
     def __str__(self):
         return f'{self.name}'
-

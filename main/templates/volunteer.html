@@ -1,27 +1,70 @@
 {% extends 'index.html' %}
 
+{% load static %}
+
 {% block content %}
-    <!--Start of volunteer-->
-    <section id="volunteer">
-        <div class="container">
-            <div class="row vol_area">
-                <div class="col-md-8">
-                    <div class="volunteer_content">
-                        <h3>Become a <span>Volunteer</span></h3>
-                        <p>Join Our Team And Help the world. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur.</p>
-                    </div>
+
+<section id="volunteer">
+    <div class="container">
+        <div class="row vol_area">
+            <div class="col-md-8" style="margin-left: 200px;">
+                <div class="volunteer_content">
+                    <h3>Стань <span>Волонтером!</span></h3>
+                    <p>Присоединяйся к нашей команде! Начни свой путь вместе с нами!</p>
                 </div>
-                <!--End of col-md-8-->
-                <div class="col-md-3 col-md-offset-1">
-                    <div class="join_us">
-                        <a href="#" class="vol_cust_btn">join us</a>
-                    </div>
-                </div>
-                <!--End of col-md-3-->
             </div>
-            <!--End of row and vol_area-->
+            <!--End of col-md-8-->
+            <!--End of col-md-3-->
         </div>
-        <!--End of container-->
-    </section>
-    <!--end of volunteer-->
-{% endblock content %}
+        <!--End of row and vol_area-->
+    </div>
+    <!--End of container-->
+</section>
+
+<section style="text-align: center">
+    <div class="col-md-6-mx-auto" style="max-width: 800px; margin: 0 auto;">
+        <div class="msg">
+            <div class="msg_title">
+                <h5><b>Стань волонтером в Tazar!</b></h5>
+            </div>
+            
+            <div class="form_area w-100">
+                <div class="contact-form wow fadeIn animated" data-wow-offset="10" data-wow-duration="1.5s">
+                    <div id="message"></div>
+                    <form action="" method="post" class="form-horizontal contact-1" role="form" name="contactform" id="contactform">
+                        <div class="form-group">
+                            <div class="col-sm-6" style="margin-bottom: 20px;">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Имя">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Фамилия">
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="subject" class="form-control" id="subject" placeholder="Образование (Университет, факультет-направление, курс)">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Контактный номер">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Электронная почта">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="subject" class="form-control" id="subject" placeholder="Адрес проживания">
+                                <div style="text-align:left; margin-bottom: 20px;"><p>Фото волонтера</p></div>
+                                <input type="file" style="margin-bottom: 20px;"  class="form-control" name="file" id="file" placeholder="upload your image">
+                                <div class="text_area" style="width:auto;">
+                                    <textarea name="contact-message" id="msg" style="width:100%;" class="form-control" cols="30" rows="8" placeholder="Сообщение"></textarea>
+                                </div>
+                                <button type="submit" class="btn custom-btn" data-loading-text="Loading...">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

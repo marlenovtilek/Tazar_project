@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 
-from main.models import User
+from main.models import User, CollectionPlaces, MaterialType
 
 
 class LoginForm(forms.Form):
@@ -86,3 +86,47 @@ class UserPasswordChangeForm(SetPasswordForm):
     class Meta:
         model = User
         fields = ["new_password1", "new_password2"]
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = CollectionPlaces
+        fields = (
+            "name", 
+            "address", 
+            "phone", 
+            "working_hours", 
+            "photo", 
+            "email", 
+            "material_type"
+            )
+
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class":"form-control"}
+            ),
+            "addres": forms.TextInput(
+                attrs={"class":"form-control"}
+            ),
+            "phone": forms.TextInput(
+                attrs={"class":"form-control"}
+            ),
+            "working_hours": forms.TextInput(
+                attrs={"class":"form-control"}
+            ),
+            "photo": forms.FileInput(
+                attrs={"class":"form-control"}
+            ),
+            "email": forms.TextInput(
+                attrs={"class":"form-control"}
+            ),
+            "material_type": forms.CheckboxSelectMultiple(
+                attrs={"class":"form-control"}
+            )
+        }
+
+    material_types = forms.ModelMultipleChoiceField(
+        widget = forms.CheckboxSelectMultiple(),
+        queryset = MaterialType.objects.all(),
+        required = False
+    )   

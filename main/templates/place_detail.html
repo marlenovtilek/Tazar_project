@@ -1,20 +1,29 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <section id="place">
-        <div class="event_news">
-            <div class="event_single_item fix">
-                <div class="event_news_img floatleft">
-                    <img src="{{ object.photo.url }}" alt="">
-                </div>
-                <div class="event_news_text">
-                    <h4>{{ object.name }}</h4>
-                    <p>{{ object.address }}</p>
-                    <p>{{ object.phone }}</p>
-                    <p>{{ object.working_from }}-{{ object.working_to }}</p>
-                    {% for type in object.material_type.all %}
-                        <p>{{ type.name }}</p>
-                    {% endfor %}
+    <section style="text-align:center">
+        <div class="col-md-4" >
+            <div class="blog_news">
+                <div class="single_blog_item">
+                    <div class="blog_img">
+                        <img src="{{ object.photo.url }}" alt="">
+                        <a href=""><h3>{{ object.name }}</h3></a>
+                        <div class="expert">
+                            <div class="center-side text-center">
+                                <p class="left_side">
+                                    <span><i class="fa fa-phone" style="">{{ object.phone }}</i></span><br>
+                                    <span class="phone"> </span>
+                                    <a href=""><span class="email"><i class="fa fa-email"></i>{{ object.address }}</span></a>
+                                    <br><a class="email"><i class="fa fa-email"></i>{{ object.working_from }} - {{ object.working_to }}</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <p class="blog_news_content"><b>{% for type in object.material_type.all %}
+                            {{ type.name }}</p>
+                            {% endfor %}<br>
+                        <a href="{{ object.urls }}" target="_blank" class="blog_link">Подробнее</a>
+                    </div>
                 </div>
             </div>
         </div>

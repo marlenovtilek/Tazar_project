@@ -15,6 +15,7 @@ urlpatterns = [
     path('logout/', views.logout_user, name = "logout"),
     path('partners/',views.PartnersView.as_view(), name = 'partners'),
     path('my_profile/', views.UserProfileView.as_view(), name = 'user_profile'),
-    # path('collection_places/search_list/', views.)
-    path('my_places', views.UserCollectionPlacesView.as_view(), name = 'my_places')
+    path('my_places', views.UserCollectionPlacesView.as_view(), name = 'my_places'),
+    path('post/', views.PostCreateView.as_view(), name = 'post'),
+    # path('collection_places/post/', views.PostCreateView.as_view(), name='post'),
 ]

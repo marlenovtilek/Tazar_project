@@ -4,59 +4,11 @@
 
 {% block content %}
 
-<section id="blog">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="latest_blog text-center">
-                    <h2>Наши партнеры</h2>
-                </div>
+    <section id="blog">
+        <div class="col-md-12">
+            <div class="latest_blog text-center">
+                <h2>Точки приема отходов</h2>
             </div>
-        </div>
-        <div class="row">
-            {% for i in object_list %}
-                <div class="col-md-4">
-                    <div class="blog_news">
-                        <div class="single_blog_item">
-                            <div class="blog_img">
-                                <img src="{{ i.photo.url }}" alt="">
-                                <a href="{% url 'place_detail' %}"><h3>{{ i.name }}</h3></a>
-                                <div class="expert">
-                                    <div class="center-side text-center">
-                                        <p class="left_side">
-                                            <span><i class="fa fa-phone" style="">{{ i.phone }}</i></span><br>
-                                            <span class="phone"> </span>
-                                            <a href=""><span class="email"><i class="fa fa-email"></i>{{ i.address }}</span></a>
-                                            <br><a class="email"><i class="fa fa-email"></i>{{ i.working_from }} - {{ i.working_to }}</a>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <p class="blog_news_content"><b>{% for type in i.material_type.all %}
-                                    {{ type.name }}</p>
-                                    {% endfor %}<br>
-                                <a href="{{ i.urls }}" target="_blank" class="blog_link">Подробнее</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-{% endblock content %}
-
-
-
-
-
-
-{% comment %} {% extends 'index.html' %}
-
-{% block content %}
-
-    <section>
         <br>
         <form action="{% url 'places' %}" method="get">
             <div class="input-group container">
@@ -66,33 +18,43 @@
             <br>
             <br>
                 <button type="submit" class="btn btn-primary" >
-                <i>Search</i>
+                <p>Искать по принимаемым сырьям.</p>
+                <p>Пример: Макулатура</p>
                 </button>
             </div>
         </form>
-    </section>
-    <section id="place" style="margin-top: 40px">
-        <div class="col-md-4">
-            {% for i in object_list %}
-                <div class="event_news" style="margin-bottom: 20px">
-                    <div class="event_single_item fix">
-                        <div class="event_news_img floatleft" style="margin-right: 10px">
-                            <img src="{{ i.photo.url }}" alt="">
-                        </div>
-                        <div class="event_news_text">
-                            <a href="{% url 'place_detail' pk=i.pk%}"><h4>{{ i.name }}</h4></a>
-                            <p><b>Адрес:</b> {{ i.address }}</p>
-                            <p><b>Телефон:</b> {{ i.phone }}</p>
-                            <p><b>Часы работы:</b> {{ i.working_from }}-{{ i.working_to }}</p>
-                            <p><b>Принимаемое сырье:</b>
-                            {% for type in i.material_type.all %}
-                                {{ type.name }},
-                            {% endfor %}
-                            </p>
+        <div class="sumbit" style="text-align: center;">
+            <a type="button" style="width:55%; margin-top: 20px; padding:10px;" href="{% url 'post' %}" class="btn btn-success"> Подать объявление в Tazar!</a>
+        </div>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
+                {% for i in object_list %}
+                    <div class="col-md-4">
+                        <div class="blog_news">
+                            <div class="single_blog_item">
+                                <div class="blog_img">
+                                    <img src="{{ i.photo.url }}" alt="">
+                                </div>
+                                <div class="blog_content">
+                                    <a href="{{ i.urls }}" target="_blank"><h3>{{ i.name }}</h3></a>
+                                    <div class="expert">
+                                        <div class="left-side text-left">
+                                            <p class="left_side">
+                                                <span><i class="fa fa-phone">{{ i.phone }}</i></span><br>
+                                                <span class="phone"> </span>
+                                                <a href=""><span class="email"><i class="fa fa-email"></i>{{ i.address }}</span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a href="{% url 'place_detail' pk=i.pk%}" target="_blank" class="blog_link">Подробнее</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </section>
-{% endblock content %} {% endcomment %}
+{% endblock content %} 
