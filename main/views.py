@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -183,24 +185,35 @@ class UserProfileView(DetailView):
         return get_object_or_404(User, pk = self.request.user.id)
 
 
-
-
-class PostCreateView(CreateView):
-    template_name = 'post.html'
-    model = CollectionPlaces
-    
+class PostView(View):
     def get(self, request):
         return render(request, 'post.html')
 
-    @login_required
-    def create_post(request):
+
+
+class PostCreateView(CreateView):
+    form_class = PostForm
+    template_name = 'post.html'
+    model = CollectionPlaces
+    success_url = reverse_lazy("")
+
+    def post(self, request):
         if request.method == 'POST':
+            values = request.POST.copy()
+            name = values["name"]
+            address = values["address"]
+            phone = values["phone"]
+            working_hours = values["working_hours"]
+            photo = values["photo"]
+            email = values["email"]
+            print(photo)
+
+            CollectionPlaces.objects.create(name=name, phone=phone, address=address, working_hours=working_hours, photo=photo, email=email)
+
             form = PostForm(request.POST)
             if form.is_valid():
-                post = form.save()
-                print(post)
-                return redirect('index.html')
-        else:
-            form = PostForm(initial={'author':request.user})
-        return render(request, 'post.html', {'form':form})
-    
+                post = form.save(commit=False)
+                post.save()
+                return HttpResponse('Data uploaded successfully')
+            else:
+                return render(request, 'post.html', {'form':form})

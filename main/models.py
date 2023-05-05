@@ -53,14 +53,13 @@ class MaterialType(models.Model):
         return f'{self.name}'
 
 class CollectionPlaces(models.Model):
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="places", null=True)
     name = models.CharField("Наименование пункта", max_length=128)
     address = models.CharField("Адрес пункта", max_length=256)
     phone = models.CharField("Контактный номер", max_length=128)
-    working_hours = models.CharField("График работы", max_length=100, null=True)
+    working_hours = models.CharField("График работы", max_length=100)
     photo = models.ImageField("Картинка", upload_to="collection_places")
-    email = models.CharField("Электронная почта", max_length=50, null=True)
-    material_type = models.ManyToManyField(MaterialType, related_name='collection_places', blank=True)
+    email = models.CharField("Электронная почта", max_length=50)
+    material_type = models.ManyToManyField(MaterialType)
 
     def __str__(self):
         return f'{self.name}'
@@ -95,16 +94,3 @@ class Volunteers(models.Model):
     def __str__(self):
         return f'{self.full_name}'
 
-
-class UserPosts(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="places",null=True)
-    name = models.CharField("Наименование пункта", max_length=128)
-    address = models.CharField("Адрес пункта", max_length=256)
-    phone = models.CharField("Контактный номер", max_length=128)
-    working_hours = models.CharField("График работы", max_length=100, null=True)
-    photo = models.ImageField("Картинка", upload_to="collection_places")
-    email = models.CharField("Электронная почта", max_length=50, null=True)
-    material_type = models.ManyToManyField(MaterialType, related_name='user_collection_places',blank=True)
-
-    def __str__(self):
-        return f'{self.name}'

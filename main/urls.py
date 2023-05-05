@@ -16,6 +16,7 @@ urlpatterns = [
     path('partners/',views.PartnersView.as_view(), name = 'partners'),
     path('my_profile/', views.UserProfileView.as_view(), name = 'user_profile'),
     path('my_places', views.UserCollectionPlacesView.as_view(), name = 'my_places'),
-    path('post/', views.PostCreateView.as_view(), name = 'post'),
-    # path('collection_places/post/', views.PostCreateView.as_view(), name='post'),
+    path('post', views.PostView.as_view(), name = 'post'),
+    path('create_post', views.PostCreateView.as_view(), name = 'create_post'),
+
 ]

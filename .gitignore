@@ -3,5 +3,6 @@ media/
 __pychache__/
 *.pyc
 .idea/
-venv/
+../venv/
 env/
+../venv/

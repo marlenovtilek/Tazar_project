@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 
 from main.models import User, CollectionPlaces, MaterialType
+from django.forms import ModelForm
 
 
 class LoginForm(forms.Form):
@@ -91,7 +92,7 @@ class UserPasswordChangeForm(SetPasswordForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = CollectionPlaces
-        fields = (
+        fields = [
             "name", 
             "address", 
             "phone", 
@@ -99,34 +100,4 @@ class PostForm(forms.ModelForm):
             "photo", 
             "email", 
             "material_type"
-            )
-
-        widgets = {
-            "name": forms.TextInput(
-                attrs={"class":"form-control"}
-            ),
-            "addres": forms.TextInput(
-                attrs={"class":"form-control"}
-            ),
-            "phone": forms.TextInput(
-                attrs={"class":"form-control"}
-            ),
-            "working_hours": forms.TextInput(
-                attrs={"class":"form-control"}
-            ),
-            "photo": forms.FileInput(
-                attrs={"class":"form-control"}
-            ),
-            "email": forms.TextInput(
-                attrs={"class":"form-control"}
-            ),
-            "material_type": forms.CheckboxSelectMultiple(
-                attrs={"class":"form-control"}
-            )
-        }
-
-    material_types = forms.ModelMultipleChoiceField(
-        widget = forms.CheckboxSelectMultiple(),
-        queryset = MaterialType.objects.all(),
-        required = False
-    )   
+            ]
